@@ -5,24 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Assistente de Relatórios Humanizados</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f6f2f7;color:#2d2430}
-header{background:linear-gradient(135deg,#8e5a9f,#c28abf);color:white;padding:28px 20px;text-align:center}
-header h1{margin:0;font-size:28px}header p{margin:8px 0 0;font-size:15px;opacity:.95}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#F5F8FB;color:#1F2937}
+header{background:linear-gradient(135deg,#2F5D7C,#5A8FB5);color:white;padding:42px 20px 38px;text-align:center;box-shadow:0 8px 24px rgba(47,93,124,.22)}
+.header-inner{max-width:900px;margin:0 auto}
+.header-icon{width:64px;height:64px;margin:0 auto 14px;border-radius:18px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:34px;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.22)}
+header h1{margin:0;font-size:34px;letter-spacing:.2px}
+header p{margin:10px auto 0;font-size:16px;opacity:.96;max-width:680px;line-height:1.5}
 main{max-width:1100px;margin:24px auto;padding:0 16px 40px}
 .card{background:white;border-radius:18px;padding:22px;margin-bottom:18px;box-shadow:0 6px 18px rgba(70,35,80,.11)}
 label{font-weight:700;display:block;margin:12px 0 6px}
-input,select,textarea{width:100%;border:1px solid #d8c8dd;border-radius:12px;padding:12px;font-size:15px;font-family:Arial,Helvetica,sans-serif;background:#fff}
+input,select,textarea{width:100%;border:1px solid #D6E4F0;border-radius:12px;padding:12px;font-size:15px;font-family:Arial,Helvetica,sans-serif;background:#fff}
 textarea{min-height:105px;resize:vertical;line-height:1.45}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .mode-box{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
-.mode{flex:1;min-width:240px;padding:14px;border:2px solid #d8c8dd;border-radius:14px;cursor:pointer;background:#fbf8fc}
+.mode{flex:1;min-width:240px;padding:14px;border:2px solid #D6E4F0;border-radius:14px;cursor:pointer;background:#F8FBFE}
 .mode input{width:auto;margin-right:8px}.mode strong{display:block;margin-bottom:5px}.hidden{display:none}
 button{border:0;border-radius:12px;padding:13px 18px;font-size:15px;font-weight:700;cursor:pointer;margin:6px 6px 6px 0}
-.primary{background:#8e5a9f;color:white}.secondary{background:#eaddec;color:#4a3150}.danger{background:#f2dede;color:#7a2d2d}
-#resultado{min-height:300px;white-space:pre-wrap;line-height:1.65;font-size:15.5px;background:#fff;border:1px solid #d8c8dd;border-radius:14px;padding:18px}
+.primary{background:#2F5D7C;color:white}.secondary{background:#E6EEF5;color:#2F5D7C}.danger{background:#f2dede;color:#7a2d2d}
+#resultado{min-height:300px;white-space:pre-wrap;line-height:1.65;font-size:15.5px;background:#fff;border:1px solid #D6E4F0;border-radius:14px;padding:18px}
 .notice{background:#fff7d8;border-left:5px solid #e0b63f;padding:12px 14px;border-radius:10px;font-size:14px;line-height:1.45}
-.small{font-size:13px;color:#6b5a70}
-.gerando{color:#8e5a9f;font-style:italic}
+.small{font-size:13px;color:#64748B}
+.gerando{color:#2F5D7C;font-style:italic}
 @media(max-width:760px){.grid{grid-template-columns:1fr}header h1{font-size:23px}}
 @media print{
   body{background:white;font-family:Arial,Helvetica,sans-serif;font-size:12pt;line-height:1.5;color:#000}
@@ -36,8 +39,11 @@ button{border:0;border-radius:12px;padding:13px 18px;font-size:15px;font-weight:
 </head>
 <body>
 <header>
-<h1>Assistente de Relatórios Humanizados</h1>
-<p>Gera relatórios com escrita profissional, acolhedora e organizada.</p>
+<div class="header-inner">
+<div class="header-icon">📝</div>
+<h1>Veloso Assist</h1>
+<p>Assistente inteligente para elaboração de relatórios pedagógicos.</p>
+</div>
 </header>
 <main>
 
@@ -85,7 +91,6 @@ button{border:0;border-radius:12px;padding:13px 18px;font-size:15px;font-weight:
 <button class="primary" onclick="gerarRelatorio()">Gerar relatório</button>
 <button class="secondary" onclick="copiarRelatorio()">Copiar texto</button>
 <button class="secondary" onclick="baixarWord()">Baixar em Word</button>
-<button class="secondary" onclick="baixarPDF()">Baixar em PDF</button>
 <button class="danger" onclick="limparTudo()">Novo relatório / limpar</button>
 </section>
 
@@ -214,14 +219,6 @@ function baixarWord(){
   const texto = document.getElementById('resultado').innerText.replace(/\n/g,'</p><p>');
   const html = `<html><head><meta charset="UTF-8"><style>@page{size:A4;margin-top:3cm;margin-left:3cm;margin-right:2cm;margin-bottom:2cm}body{font-family:Arial,sans-serif;font-size:12pt;line-height:1.5;text-align:justify}p{text-indent:1.25cm;margin:0 0 12pt 0}</style></head><body><p>${texto}</p></body></html>`;
   baixarArquivo(new Blob(['\ufeff',html],{type:'application/msword'}),'relatorio.doc');
-}
-
-function baixarPDF(){
-  const janela=window.open('','_blank');
-  janela.document.write(`<html><head><title>Relatório</title><style>@page{size:A4;margin-top:3cm;margin-left:3cm;margin-right:2cm;margin-bottom:2cm}body{font-family:Arial,sans-serif;font-size:12pt;line-height:1.5;text-align:justify}p{text-indent:1.25cm;margin:0 0 12pt 0}</style></head><body><p>${document.getElementById('resultado').innerText.replace(/\n/g,'</p><p>')}</p></body></html>`);
-  janela.document.close();
-  janela.focus();
-  janela.print();
 }
 
 function baixarArquivo(blob,nome){
