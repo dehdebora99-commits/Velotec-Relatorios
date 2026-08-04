@@ -230,7 +230,7 @@ function baixarArquivo(blob,nome){
 
 function limparTudo(){
   if(!confirm('Deseja limpar o relatório atual?'))return;
-  document.querySelectorAll('input[type="text"],input[type="date"],input[type="password"],textarea').forEach(el=>el.value='');
+  document.querySelectorAll('input[type="text"],input[type="date"],textarea').forEach(el=>el.value='');
   document.getElementById('resultado').innerText='O relatório aparecerá aqui.';
 }
 </script>
