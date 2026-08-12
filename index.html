@@ -41,7 +41,7 @@ button{border:0;border-radius:12px;padding:13px 18px;font-size:15px;font-weight:
 <header>
 <div class="header-inner">
 <div class="header-icon">📝</div>
-<h1>Veloso Assist</h1>
+<h1>Velotec Relatórios</h1>
 <p>Assistente inteligente para elaboração de relatórios pedagógicos.</p>
 </div>
 </header>
@@ -56,13 +56,27 @@ button{border:0;border-radius:12px;padding:13px 18px;font-size:15px;font-weight:
 <p class="small">A chave não é salva nem enviada a nenhum lugar além do Groq.</p>
 </div>
 
+<label>Formato do atendimento</label>
+<div class="mode-box">
+<label class="mode"><input type="radio" name="formatoAtendimento" value="individual" checked onchange="trocarFormatoAtendimento()"><strong>👤 Individual</strong>Relatório referente a um único educando.</label>
+<label class="mode"><input type="radio" name="formatoAtendimento" value="grupo" onchange="trocarFormatoAtendimento()"><strong>👥 Grupo / Turma</strong>Relatório referente a uma turma ou grupo de educandos.</label>
+</div>
+
 <div class="grid">
-<div><label for="aluno">Nome do aluno</label><input id="aluno" placeholder="Ex.: João"></div>
+<div><label id="labelAluno" for="aluno">Nome do aluno</label><input id="aluno" placeholder="Ex.: João"></div>
 <div><label for="data">Data</label><input id="data" type="date"></div>
 </div>
 <div class="grid">
 <div><label for="tipo">Tipo de atendimento</label><select id="tipo"><option>Estimulação Precoce</option><option>AEE</option><option>SAE</option><option>SPE</option></select></div>
-<div><label for="genero">Como escrever</label><select id="genero"><option value="o educando">o educando</option><option value="a educanda">a educanda</option><option value="a criança">a criança</option><option value="o aluno">o aluno</option><option value="a aluna">a aluna</option><option value="o estudante">o estudante</option><option value="a estudante">a estudante</option></select></div>
+<div><label for="genero">Como escrever</label><select id="genero">
+<option value="o educando">o educando</option>
+<option value="a educanda">a educanda</option>
+<option value="a criança">a criança</option>
+<option value="o aluno">o aluno</option>
+<option value="a aluna">a aluna</option>
+<option value="o estudante">o estudante</option>
+<option value="a estudante">a estudante</option>
+</select></div>
 </div>
 <label>Escolha o modo</label>
 <div class="mode-box">
@@ -107,6 +121,64 @@ function trocarModo(){
   document.getElementById('modoLivre').classList.toggle('hidden',modo!=='livre');
 }
 
+function trocarFormatoAtendimento(){
+  const formato=document.querySelector('input[name="formatoAtendimento"]:checked').value;
+  const grupo=formato==='grupo';
+  const labelAluno=document.getElementById('labelAluno');
+  const campoAluno=document.getElementById('aluno');
+  const genero=document.getElementById('genero');
+  const valorAtual=genero.value;
+
+  labelAluno.textContent = grupo ? 'Nome da turma / grupo' : 'Nome do aluno';
+  campoAluno.placeholder = grupo ? 'Ex.: Turma A / Grupo de Convivência' : 'Ex.: João';
+
+  if(grupo){
+    const mapa={
+      'o educando':'os educandos',
+      'a educanda':'as educandas',
+      'a criança':'as crianças',
+      'o aluno':'os alunos',
+      'a aluna':'as alunas',
+      'o estudante':'os estudantes',
+      'a estudante':'as estudantes'
+    };
+    genero.innerHTML=`
+      <option value="os educandos">os educandos</option>
+      <option value="as educandas">as educandas</option>
+      <option value="as crianças">as crianças</option>
+      <option value="os alunos">os alunos</option>
+      <option value="as alunas">as alunas</option>
+      <option value="os estudantes">os estudantes</option>
+      <option value="as estudantes">as estudantes</option>
+      <option value="a turma">a turma</option>
+      <option value="o grupo">o grupo</option>
+    `;
+    genero.value = mapa[valorAtual] || 'os educandos';
+  }else{
+    const mapa={
+      'os educandos':'o educando',
+      'as educandas':'a educanda',
+      'as crianças':'a criança',
+      'os alunos':'o aluno',
+      'as alunas':'a aluna',
+      'os estudantes':'o estudante',
+      'as estudantes':'a estudante',
+      'a turma':'o educando',
+      'o grupo':'o educando'
+    };
+    genero.innerHTML=`
+      <option value="o educando">o educando</option>
+      <option value="a educanda">a educanda</option>
+      <option value="a criança">a criança</option>
+      <option value="o aluno">o aluno</option>
+      <option value="a aluna">a aluna</option>
+      <option value="o estudante">o estudante</option>
+      <option value="a estudante">a estudante</option>
+    `;
+    genero.value = mapa[valorAtual] || 'o educando';
+  }
+}
+
 function limparTexto(txt){return(txt||'').trim().replace(/\s+/g,' ')}
 function formatarData(data){const[ano,mes,dia]=data.split('-');return`${dia}/${mes}/${ano}`}
 
@@ -121,6 +193,7 @@ async function gerarRelatorio(){
   const data    = document.getElementById('data').value;
   const tipo    = document.getElementById('tipo').value;
   const sujeito = document.getElementById('genero').value;
+  const formatoAtendimento = document.querySelector('input[name="formatoAtendimento"]:checked').value;
   const modo    = document.querySelector('input[name="modo"]:checked').value;
 
   let observacoes = '';
@@ -152,7 +225,10 @@ async function gerarRelatorio(){
   const prompt = `Você é uma pedagoga especialista em educação especial e inclusiva. Reescreva as observações abaixo em linguagem técnica, humanizada e acolhedora.
 
 REGRAS OBRIGATÓRIAS — SIGA À RISCA:
-- Use sempre "${sujeito}" para se referir ao estudante. Nunca use o nome próprio.
+- O formato do atendimento é: ${formatoAtendimento === 'grupo' ? 'GRUPO / TURMA' : 'INDIVIDUAL'}.
+- Use sempre "${sujeito}" como referência principal. Nunca use o nome próprio no corpo do relatório.
+- Se o atendimento for INDIVIDUAL, mantenha toda a concordância no singular.
+- Se o atendimento for GRUPO / TURMA, mantenha toda a concordância no plural ou coletiva, de acordo com "${sujeito}", evitando frases que tratem o atendimento como individual.
 - Reescreva APENAS o que está escrito nas observações. JAMAIS invente, suponha ou acrescente informações que não foram fornecidas.
 - Se uma área não tiver observação, NÃO escreva nada sobre ela. Nem uma frase sequer.
 - Cada observação deve gerar NO MÁXIMO 2 frases curtas. Não expanda além do que foi escrito.
@@ -198,7 +274,8 @@ ${observacoes}`;
     }
 
     let rel = `${tipo}:\n\n`;
-    if(aluno||data) rel+=`${aluno?'Educando(a): '+aluno:''}${aluno&&data?' | ':''}${data?'Data: '+formatarData(data):''}\n\n`;
+    const rotuloIdentificacao = formatoAtendimento === 'grupo' ? 'Turma/Grupo' : 'Educando(a)';
+    if(aluno||data) rel+=`${aluno?rotuloIdentificacao+': '+aluno:''}${aluno&&data?' | ':''}${data?'Data: '+formatarData(data):''}\n\n`;
     rel += texto.trim();
 
     el.innerText = rel;
@@ -231,8 +308,12 @@ function baixarArquivo(blob,nome){
 function limparTudo(){
   if(!confirm('Deseja limpar o relatório atual?'))return;
   document.querySelectorAll('input[type="text"],input[type="date"],textarea').forEach(el=>el.value='');
+  const individual=document.querySelector('input[name="formatoAtendimento"][value="individual"]');
+  if(individual) individual.checked=true;
+  trocarFormatoAtendimento();
   document.getElementById('resultado').innerText='O relatório aparecerá aqui.';
 }
+window.addEventListener('DOMContentLoaded', trocarFormatoAtendimento);
 </script>
 </body>
 </html>
