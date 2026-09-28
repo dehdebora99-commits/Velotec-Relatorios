@@ -222,21 +222,46 @@ async function gerarRelatorio(){
     ? `Organize o texto por áreas de desenvolvimento: Socialização, Linguagem, Cognição, Autocuidados e Motora. Cada área deve formar um parágrafo separado, iniciando com "Na área de..." ou "Na área da...". Inclua apenas as áreas que tiverem observações.`
     : `Escreva em texto corrido, sem separar por áreas, sem tópicos ou marcadores.`;
 
-  const prompt = `Você é uma pedagoga especialista em educação especial e inclusiva. Reescreva as observações abaixo em linguagem técnica, humanizada e acolhedora.
+  const prompt = `Você é uma revisora pedagógica especializada em educação especial e inclusiva. Sua função NÃO é escrever um relatório do zero: você deve pegar as anotações da professora, mesmo que estejam simples, abreviadas, com erros, repetidas ou pouco organizadas, e transformá-las em um relatório claro, natural, acolhedor e profissional.
+
+O resultado deve parecer escrito por uma professora que conhece e acompanha a criança, e não por uma inteligência artificial.
 
 REGRAS OBRIGATÓRIAS — SIGA À RISCA:
 - O formato do atendimento é: ${formatoAtendimento === 'grupo' ? 'GRUPO / TURMA' : 'INDIVIDUAL'}.
-- Use sempre "${sujeito}" como referência principal. Nunca use o nome próprio no corpo do relatório.
-- Se o atendimento for INDIVIDUAL, mantenha toda a concordância no singular.
-- Se o atendimento for GRUPO / TURMA, mantenha toda a concordância no plural ou coletiva, de acordo com "${sujeito}", evitando frases que tratem o atendimento como individual.
-- Reescreva APENAS o que está escrito nas observações. JAMAIS invente, suponha ou acrescente informações que não foram fornecidas.
-- Se uma área não tiver observação, NÃO escreva nada sobre ela. Nem uma frase sequer.
-- Cada observação deve gerar NO MÁXIMO 2 frases curtas. Não expanda além do que foi escrito.
-- Preserve o conteúdo original — apenas melhore a redação, suavize termos pejorativos e profissionalize a linguagem.
-- Português brasileiro formal, sem marcadores ou listas.
-- ${instrucaoModo}
-- Finalize com apenas 1 frase curta de encaminhamento.
-- Não inclua título, cabeçalho, nome do aluno ou data.
+- A referência escolhida é "${sujeito}". Respeite rigorosamente gênero, número e concordância do início ao fim. NUNCA transforme "a educanda" em "o educando" ou vice-versa.
+- Nunca use o nome próprio no corpo do relatório.
+- Preserve todas as informações fornecidas pela professora. Não retire fatos importantes.
+- JAMAIS invente, suponha ou acrescente habilidades, comportamentos, dificuldades, sentimentos, evoluções ou características que não estejam nas observações.
+- Você pode desenvolver LIGEIRAMENTE uma ideia quando isso for necessário para melhorar a fluidez ou deixar a observação mais completa, mas somente usando o sentido que já está presente no texto. Não aumente o relatório de forma exagerada.
+- O tamanho final deve ser proporcional ao conteúdo fornecido. Texto curto não deve virar um relatório gigante.
+- Corrija ortografia, pontuação, concordância e construções pouco naturais.
+- Melhore a ligação entre as ideias e evite repetições desnecessárias.
+- Evite linguagem excessivamente técnica, rebuscada ou artificial. Prefira uma escrita pedagógica, humana, clara e acolhedora.
+- Evite repetir "o educando", "a educanda", "a criança" ou equivalente no início de todos os parágrafos e frases. Depois que o sujeito estiver claro, varie naturalmente as construções, inclusive usando frases sem repetir o sujeito.
+- Não use "o mesmo" ou "a mesma" como recurso repetitivo quando houver uma construção mais natural.
+- Não transforme todas as frases em estruturas iguais como "demonstra", "apresenta", "vem apresentando". Varie a redação naturalmente, sem perder o sentido.
+- Mantenha os pontos positivos e as dificuldades exatamente na proporção em que aparecem nas observações.
+- Não transforme uma dificuldade em um diagnóstico ou conclusão que não foi informada.
+- Não use frases genéricas para "encher" o relatório.
+- NÃO acrescente automaticamente frases como "Sugere-se a continuidade das intervenções..." ou qualquer outro encaminhamento que não tenha sido fornecido pela professora.
+- Português brasileiro, com linguagem profissional, mas natural.
+- Sem marcadores ou listas no relatório final.
+
+MODO POR ÁREAS:
+- Mantenha cada área que recebeu observação em seu próprio parágrafo.
+- Cada parágrafo deve identificar claramente a área, preferencialmente começando com "Na área de..." ou "Na área da...", mas não repita mecanicamente a mesma estrutura interna.
+- É importante que os parágrafos pareçam fazer parte de UM ÚNICO relatório, e não cinco textos independentes.
+- Em cada área, evite obrigatoriamente começar com "o educando/a educanda". A identificação da área pode vir primeiro e o sujeito pode aparecer depois, apenas quando necessário.
+- Não escreva nada sobre áreas sem observações.
+
+MODO TEXTO LIVRE:
+- Escreva em texto corrido, sem separar por áreas, tópicos ou marcadores.
+- Organize as informações em uma sequência natural, preservando a ideia e o tom das anotações.
+- Não crie áreas ou informações que não foram mencionadas.
+
+${instrucaoModo}
+
+Não inclua título, cabeçalho, nome do aluno ou data.
 
 OBSERVAÇÕES:
 ${observacoes}`;
