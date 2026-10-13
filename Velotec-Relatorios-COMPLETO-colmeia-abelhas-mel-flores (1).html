@@ -1,0 +1,121 @@
+<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Assistente de Relatórios Humanizados</title> <style>
+*{box-sizing:border-box}
+:root{
+  --honey:#f4b942;
+  --honey-light:#fff4c9;
+  --honey-pale:#fffaf0;
+  --brown:#68451f;
+  --brown-dark:#4d3219;
+  --green:#66854a;
+  --green-light:#edf4e5;
+  --line:#ead9a8;
+}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 12% 8%,rgba(255,220,112,.22) 0 7%,transparent 7.3%),
+    radial-gradient(circle at 91% 20%,rgba(255,220,112,.18) 0 6%,transparent 6.3%),
+    repeating-linear-gradient(60deg,transparent 0 42px,rgba(231,182,61,.055) 42px 44px,transparent 44px 84px),
+    var(--honey-pale);
+  color:var(--brown-dark);
+}
+header{
+  background:linear-gradient(135deg,#f8c94f 0%,#f3b83e 55%,#eaa632 100%);
+  color:var(--brown-dark);
+  padding:34px 20px 32px;
+  text-align:center;
+  box-shadow:0 8px 24px rgba(112,76,25,.16);
+  border-bottom:7px solid #d99a2b;
+  position:relative;
+  overflow:hidden;
+}
+header:before,header:after{
+  content:"🐝  🌼  🍯";
+  position:absolute;
+  color:rgba(255,255,255,.8);
+  font-size:34px;
+  letter-spacing:5px;
+  text-shadow:0 2px 0 rgba(104,69,31,.08);
+  pointer-events:none;
+}
+header:before{left:2%;top:12px;transform:rotate(-8deg)}
+header:after{right:2%;bottom:8px;content:"🌷  🐝  🌻";transform:rotate(6deg)}
+.header-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.header-icon{
+  width:70px;height:70px;margin:0 auto 14px;border-radius:22px;
+  background:#fff8dc;display:flex;align-items:center;justify-content:center;
+  font-size:38px;border:3px solid rgba(104,69,31,.12);
+  box-shadow:0 5px 0 rgba(104,69,31,.12)
+}
+header h1{margin:0;font-size:34px;letter-spacing:.2px;color:#543719}
+header p{margin:10px auto 0;font-size:16px;max-width:680px;line-height:1.5;color:#63441f}
+main{max-width:1100px;margin:24px auto;padding:0 16px 40px}
+.card{
+  background:#fffef9;border:1px solid #f0e2b8;border-radius:20px;
+  padding:22px;margin-bottom:18px;box-shadow:0 6px 18px rgba(104,69,31,.08);position:relative
+}
+.card:not(.form-card):not(.no-print)::after{
+  content:"🌼";position:absolute;right:14px;top:10px;font-size:21px;opacity:.72;
+  pointer-events:none
+}
+.notice::after{content:" 🍯";font-size:18px}
+h2{color:#725020}
+label{font-weight:700;display:block;margin:12px 0 6px;color:var(--brown)}
+input,select,textarea{
+  width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px;
+  font-size:15px;font-family:Arial,Helvetica,sans-serif;background:#fff;
+  color:#3f3425;transition:border-color .15s,box-shadow .15s
+}
+input:focus,select:focus,textarea:focus{
+  outline:none;border-color:#e7ad34;box-shadow:0 0 0 3px rgba(244,185,66,.2)
+}
+textarea{min-height:105px;resize:vertical;line-height:1.45}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.mode-box{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.mode{
+  flex:1;min-width:240px;padding:14px;border:2px solid #ecdca9;
+  border-radius:16px;cursor:pointer;background:#fff9e8;
+  transition:background .15s,border-color .15s,transform .15s
+}
+.mode:hover{background:#fff2c6;border-color:#e7b63d;transform:translateY(-1px)}
+.mode input{width:auto;margin-right:8px;accent-color:#b47a20}
+.mode strong{display:block;margin-bottom:5px;color:#68451f}
+.hidden{display:none}
+button{
+  border:0;border-radius:13px;padding:13px 18px;font-size:15px;font-weight:700;
+  cursor:pointer;margin:6px 6px 6px 0;transition:transform .15s,filter .15s;
+  box-shadow:0 3px 0 rgba(80,54,22,.12)
+}
+button:hover{filter:brightness(.98);transform:translateY(-1px)}
+button:disabled{opacity:.6;cursor:wait;transform:none}
+.primary{background:#d99a2b;color:#fff}
+.secondary{background:#edf3df;color:#45652f}
+.danger{background:#f8e4d8;color:#8a402d}
+#resultado{
+  min-height:300px;white-space:pre-wrap;line-height:1.65;font-size:15.5px;
+  background:#fff;border:1.5px solid #ead9a8;border-radius:16px;padding:18px;
+  color:#30291f
+}
+.notice{
+  background:#fff4c9;border-left:5px solid #e4ad2f;padding:12px 14px;
+  border-radius:10px;font-size:14px;line-height:1.45;color:#65491f
+}
+.small{font-size:13px;color:#7d715c}
+.gerando{color:#9a6a17;font-style:italic}
+@media(max-width:760px){
+  .grid{grid-template-columns:1fr}
+  header h1{font-size:25px}
+  header:before{left:-22px}
+  header:after{right:-22px}
+  .card{padding:17px}
+}
+@media print{
+  body{background:white;font-family:Arial,Helvetica,sans-serif;font-size:12pt;line-height:1.5;color:#000}
+  header,.no-print,.card.form-card{display:none!important}
+  main{margin:0;max-width:none;padding:0}
+  .card{box-shadow:none;border:none;padding:0;margin:0}
+  #resultado{border:none;padding:0;margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12pt;line-height:1.5;text-align:justify;white-space:pre-wrap}
+  @page{size:A4;margin-top:3cm;margin-left:3cm;margin-right:2cm;margin-bottom:2cm}
+}
+</style> </head> <body> <header> <div class="header-inner"> <div class="header-icon">📝</div> <h1>Velotec Relatórios</h1> <p>Assistente inteligente para elaboração de relatórios pedagógicos.</p> </div> </header> <main>  <section class="card form-card"> <div class="notice">Este sistema não salva os relatórios. O texto fica apenas na tela enquanto você usa e pode ser baixado no seu computador.</div>  <div style="margin-top:14px"> <label for="apiKey">Chave da API Groq</label> <input id="apiKey" type="password" placeholder="Cole aqui sua chave do Groq (começa com gsk\_)"> <p class="small">A chave não é salva nem enviada a nenhum lugar além do Groq.</p> </div>  <label>Formato do atendimento</label> <div class="mode-box"> <label class="mode"><input type="radio" name="formatoAtendimento" value="individual" checked onchange="trocarFormatoAtendimento()"><strong>👤 Individual</strong>Relatório referente a um único educando.</label> <label class="mode"><input type="radio" name="formatoAtendimento" value="grupo" onchange="trocarFormatoAtendimento()"><strong>👥 Grupo / Turma</strong>Relatório referente a uma turma ou grupo de educandos.</label> </div>  <div class="grid"> <div><label id="labelAluno" for="aluno">Nome do aluno</label><input id="aluno" placeholder="Ex.: João"></div> <div><label for="data">Data</label><input id="data" type="date"></div> </div> <div class="grid"> <div><label for="tipo">Tipo de atendimento</label><select id="tipo"><option>Estimulação Precoce</option><option>AEE</option><option>SAE</option><option>SPE</option></select></div> <div><label for="genero">Como escrever</label><select id="genero"> <option value="o educando">o educando</option> <option value="a educanda">a educanda</option> <option value="a criança">a criança</option> <option value="o aluno">o aluno</option> <option value="a aluna">a aluna</option> <option value="o estudante">o estudante</option> <option value="a estudante">a estudante</option> </select></div> </div> <label>Escolha o modo</label> <div class="mode-box"> <label class="mode"><input type="radio" name="modo" value="areas" checked onchange="trocarModo()"><strong>Modo 1 – Por áreas</strong>Você escreve em cada área e o sistema reescreve mantendo a ideia.</label> <label class="mode"><input type="radio" name="modo" value="livre" onchange="trocarModo()"><strong>Modo 2 – Texto livre</strong>Você escreve tudo junto e o sistema reescreve em texto corrido, sem separar por áreas.</label> </div> </section>  <section id="modoAreas" class="card form-card"> <h2>Modo 1 – Por áreas</h2> <label>Socialização</label><textarea id="socializacao" placeholder="Ex.: entrou agitado, não quis dividir brinquedos, depois aceitou com ajuda..."></textarea> <label>Linguagem</label><textarea id="linguagem" placeholder="Ex.: falou poucas palavras, respondeu com gestos, dificuldade em alguns fonemas..."></textarea> <label>Cognição</label><textarea id="cognicao" placeholder="Ex.: não reconheceu cores, fez pareamento, montou quebra-cabeça..."></textarea> <label>Autocuidados</label><textarea id="autocuidados" placeholder="Ex.: guardou materiais, lavou as mãos com ajuda, usa fralda..."></textarea> <label>Motora</label><textarea id="motora" placeholder="Ex.: fez encaixe, dificuldade na pinça, pega do lápis em transição..."></textarea> </section>  <section id="modoLivre" class="card form-card hidden"> <h2>Modo 2 – Texto livre</h2> <label>Escreva suas observações livremente</label> <textarea id="textoLivre" style="min-height:220px" placeholder="Ex.: O aluno demonstrou resistência a algumas propostas, apresentou comunicação reduzida e necessitou de direcionamento durante as interações."></textarea> <p class="small">Pode escrever com palavras simples. O sistema preserva a ideia, suaviza os termos e melhora a escrita, sem mencionar áreas.</p> </section>  <section class="card no-print"> <button class="primary" onclick="gerarRelatorio()">Gerar relatório</button> <button class="secondary" onclick="copiarRelatorio()">Copiar texto</button> <button class="secondary" onclick="baixarWord()">Baixar em Word</button> <button class="danger" onclick="limparTudo()">Novo relatório / limpar</button> </section>  <section class="card"> <h2 class="no-print">Relatório gerado</h2> <div id="resultado">O relatório aparecerá aqui.</div> </section> </main>  <script> function trocarModo(){   const modo=document.querySelector('input[name="modo"]:checked').value;   document.getElementById('modoAreas').classList.toggle('hidden',modo!=='areas');   document.getElementById('modoLivre').classList.toggle('hidden',modo!=='livre'); }  function trocarFormatoAtendimento(){   const formato=document.querySelector('input[name="formatoAtendimento"]:checked').value;   const grupo=formato==='grupo';   const labelAluno=document.getElementById('labelAluno');   const campoAluno=document.getElementById('aluno');   const genero=document.getElementById('genero');   const valorAtual=genero.value;    labelAluno.textContent = grupo ? 'Nome da turma / grupo' : 'Nome do aluno';   campoAluno.placeholder = grupo ? 'Ex.: Turma A / Grupo de Convivência' : 'Ex.: João';    if(grupo){     const mapa={       'o educando':'os educandos',       'a educanda':'as educandas',       'a criança':'as crianças',       'o aluno':'os alunos',       'a aluna':'as alunas',       'o estudante':'os estudantes',       'a estudante':'as estudantes'     };     genero.innerHTML=`       <option value="os educandos">os educandos</option>       <option value="as educandas">as educandas</option>       <option value="as crianças">as crianças</option>       <option value="os alunos">os alunos</option>       <option value="as alunas">as alunas</option>       <option value="os estudantes">os estudantes</option>       <option value="as estudantes">as estudantes</option>       <option value="a turma">a turma</option>       <option value="o grupo">o grupo</option>     `;     genero.value = mapa[valorAtual] || 'os educandos';   }else{     const mapa={       'os educandos':'o educando',       'as educandas':'a educanda',       'as crianças':'a criança',       'os alunos':'o aluno',       'as alunas':'a aluna',       'os estudantes':'o estudante',       'as estudantes':'a estudante',       'a turma':'o educando',       'o grupo':'o educando'     };     genero.innerHTML=`       <option value="o educando">o educando</option>       <option value="a educanda">a educanda</option>       <option value="a criança">a criança</option>       <option value="o aluno">o aluno</option>       <option value="a aluna">a aluna</option>       <option value="o estudante">o estudante</option>       <option value="a estudante">a estudante</option>     `;     genero.value = mapa[valorAtual] || 'o educando';   } }  function limparTexto(txt){return(txt||'').trim().replace(/\s+/g,' ')} function formatarData(data){const[ano,mes,dia]=data.split('-');return`${dia}/${mes}/${ano}`}  async function gerarRelatorio(){   const chave = limparTexto(document.getElementById('apiKey').value);   if(!chave){     alert('Cole sua chave da API Groq no campo acima.');     return;   }    const aluno   = limparTexto(document.getElementById('aluno').value);   const data    = document.getElementById('data').value;   const tipo    = document.getElementById('tipo').value;   const sujeito = document.getElementById('genero').value;   const formatoAtendimento = document.querySelector('input[name="formatoAtendimento"]:checked').value;   const modo    = document.querySelector('input[name="modo"]:checked').value;    let observacoes = '';   if(modo==='areas'){     const areas = ['socializacao','linguagem','cognicao','autocuidados','motora'];     const nomes = ['Socialização','Linguagem','Cognição','Autocuidados','Motora'];     areas.forEach((area,i)=>{       const val = limparTexto(document.getElementById(area).value);       if(val) observacoes += `${nomes[i]}: ${val}\n`;     });   } else {     observacoes = limparTexto(document.getElementById('textoLivre').value);   }    if(!observacoes){     document.getElementById('resultado').innerText='Escreva suas observações para gerar o relatório.';     return;   }    const el = document.getElementById('resultado');   const botaoGerar = document.querySelector('button.primary');   if(botaoGerar) botaoGerar.disabled = true;   el.innerHTML = '<span class="gerando">Gerando relatório, aguarde...</span>';    const instrucaoModo = modo==='areas'     ? `Organize o texto por áreas de desenvolvimento: Socialização, Linguagem, Cognição, Autocuidados e Motora. Cada área deve formar um parágrafo separado, iniciando com "Na área de..." ou "Na área da...". Inclua apenas as áreas que tiverem observações.`     : `Escreva em texto corrido, sem separar por áreas, sem tópicos ou marcadores.`;    const prompt = `Você é uma revisora pedagógica especializada em educação especial e inclusiva. Sua função NÃO é escrever um relatório do zero: você deve pegar as anotações da professora, mesmo que estejam simples, abreviadas, com erros, repetidas ou pouco organizadas, e transformá-las em um relatório claro, natural, acolhedor e profissional.  O resultado deve parecer escrito por uma professora que conhece e acompanha a criança, e não por uma inteligência artificial.  REGRAS OBRIGATÓRIAS — SIGA À RISCA: - O formato do atendimento é: ${formatoAtendimento === 'grupo' ? 'GRUPO / TURMA' : 'INDIVIDUAL'}. - A referência escolhida é "${sujeito}". Respeite rigorosamente gênero, número e concordância do início ao fim. NUNCA transforme "a educanda" em "o educando" ou vice-versa. - Nunca use o nome próprio no corpo do relatório. - Preserve todas as informações fornecidas pela professora. Não retire fatos importantes. - JAMAIS invente, suponha ou acrescente habilidades, comportamentos, dificuldades, sentimentos, evoluções ou características que não estejam nas observações. - Você pode desenvolver LIGEIRAMENTE uma ideia quando isso for necessário para melhorar a fluidez ou deixar a observação mais completa, mas somente usando o sentido que já está presente no texto. Não aumente o relatório de forma exagerada. - O tamanho final deve ser proporcional ao conteúdo fornecido. Texto curto não deve virar um relatório gigante. - Corrija ortografia, pontuação, concordância e construções pouco naturais. - Melhore a ligação entre as ideias e evite repetições desnecessárias. - Evite linguagem excessivamente técnica, rebuscada ou artificial. Prefira uma escrita pedagógica, humana, clara e acolhedora. - Evite repetir "o educando", "a educanda", "a criança" ou equivalente no início de todos os parágrafos e frases. Depois que o sujeito estiver claro, varie naturalmente as construções, inclusive usando frases sem repetir o sujeito. - Não use "o mesmo" ou "a mesma" como recurso repetitivo quando houver uma construção mais natural. - Não transforme todas as frases em estruturas iguais como "demonstra", "apresenta", "vem apresentando". Varie a redação naturalmente, sem perder o sentido. - Mantenha os pontos positivos e as dificuldades exatamente na proporção em que aparecem nas observações. - Não transforme uma dificuldade em um diagnóstico ou conclusão que não foi informada. - Não use frases genéricas para "encher" o relatório. - NÃO acrescente automaticamente frases como "Sugere-se a continuidade das intervenções..." ou qualquer outro encaminhamento que não tenha sido fornecido pela professora. - Português brasileiro, com linguagem profissional, mas natural. - Sem marcadores ou listas no relatório final.  MODO POR ÁREAS: - Mantenha cada área que recebeu observação em seu próprio parágrafo. - Cada parágrafo deve identificar claramente a área, preferencialmente começando com "Na área de..." ou "Na área da...", mas não repita mecanicamente a mesma estrutura interna. - É importante que os parágrafos pareçam fazer parte de UM ÚNICO relatório, e não cinco textos independentes. - Em cada área, evite obrigatoriamente começar com "o educando/a educanda". A identificação da área pode vir primeiro e o sujeito pode aparecer depois, apenas quando necessário. - Não escreva nada sobre áreas sem observações.  MODO TEXTO LIVRE: - Escreva em texto corrido, sem separar por áreas, tópicos ou marcadores. - Organize as informações em uma sequência natural, preservando a ideia e o tom das anotações. - Não crie áreas ou informações que não foram mencionadas.  ${instrucaoModo}  Não inclua título, cabeçalho, nome do aluno ou data.  OBSERVAÇÕES: ${observacoes}`;    try {     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {       method: 'POST',       headers: {         'Content-Type': 'application/json',         'Authorization': `Bearer ${chave}`       },       body: JSON.stringify({         model: 'openai/gpt-oss-120b',         messages: [{ role: 'user', content: prompt }],         temperature: 0.4,         max_tokens: 1500       })     });      if(!response.ok){       const err = await response.json();       const msg = err?.error?.message || response.status;       el.innerText = `Erro da API: ${msg}`;       if(botaoGerar) botaoGerar.disabled = false;       return;     }      const dados = await response.json();     const texto = dados.choices?.[0]?.message?.content || '';      if(!texto){       el.innerText = 'A API não retornou texto. Tente novamente.';       if(botaoGerar) botaoGerar.disabled = false;       return;     }      let rel = `${tipo}:\n\n`;     const rotuloIdentificacao = formatoAtendimento === 'grupo' ? 'Turma/Grupo' : 'Educando(a)';     if(aluno||data) rel+=`${aluno?rotuloIdentificacao+': '+aluno:''}${aluno&&data?' | ':''}${data?'Data: '+formatarData(data):''}\n\n`;     rel += texto.trim();      el.innerText = rel;     if(botaoGerar) botaoGerar.disabled = false;    } catch(e){     el.innerText = 'Erro de conexão. Verifique sua internet e tente novamente.';     if(botaoGerar) botaoGerar.disabled = false;   } }  function copiarRelatorio(){   navigator.clipboard.writeText(document.getElementById('resultado').innerText);   alert('Relatório copiado!'); }  function baixarWord(){   const texto = document.getElementById('resultado').innerText.replace(/\n/g,'</p><p>');   const html = `<html><head><meta charset="UTF-8"><style>@page{size:A4;margin-top:3cm;margin-left:3cm;margin-right:2cm;margin-bottom:2cm}body{font-family:Arial,sans-serif;font-size:12pt;line-height:1.5;text-align:justify}p{text-indent:1.25cm;margin:0 0 12pt 0}</style></head><body><p>${texto}</p></body></html>`;   baixarArquivo(new Blob(['\ufeff',html],{type:'application/msword'}),'relatorio.doc'); }  function baixarArquivo(blob,nome){   const url=URL.createObjectURL(blob);   const a=document.createElement('a');   a.href=url;a.download=nome;a.click();   URL.revokeObjectURL(url); }  function limparTudo(){   if(!confirm('Deseja limpar o relatório atual?'))return;   document.querySelectorAll('input[type="text"],input[type="date"],textarea').forEach(el=>el.value='');   const individual=document.querySelector('input[name="formatoAtendimento"][value="individual"]');   if(individual) individual.checked=true;   trocarFormatoAtendimento();   document.getElementById('resultado').innerText='O relatório aparecerá aqui.'; } window.addEventListener('DOMContentLoaded', trocarFormatoAtendimento); </script> </body> </html>
