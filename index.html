@@ -177,14 +177,34 @@ main>section:last-child{margin-bottom:0}
   #resultado{border:none;padding:0;margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12pt;line-height:1.5;text-align:justify;white-space:pre-wrap}
   @page{size:A4;margin-top:3cm;margin-left:3cm;margin-right:2cm;margin-bottom:2cm}
 }
+
+/* Tema visual Velotec Abelhinhas — apenas aparência */
+body{background:#fff8e6;color:#293548;position:relative;min-height:100vh}
+body:before,body:after{content:"";position:fixed;z-index:-1;width:220px;height:250px;opacity:.72;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='104' viewBox='0 0 120 104'%3E%3Cg fill='none' stroke='%23ffb51f' stroke-width='2'%3E%3Cpath d='M30 2 56 17v30L30 62 4 47V17Z'/%3E%3Cpath d='M90 2 116 17v30L90 62 64 47V17Z'/%3E%3Cpath d='M60 54 86 69v30L60 114 34 99V69Z'/%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat}
+body:before{left:-34px;top:0} body:after{right:-34px;bottom:0;transform:rotate(180deg)}
+header{background:#fff8e6;background-image:none;border-bottom:1px solid #f3dca1;box-shadow:0 4px 16px rgba(151,111,41,.08);padding:25px 20px 27px}
+.header-inner{max-width:980px}.header-icon{background:transparent;border:0;box-shadow:none;font-size:48px;width:auto;height:auto;margin:0 auto 4px;border-radius:0}
+header h1{color:#4a2c0b;font-size:38px} header p{color:#4f4539}
+.bee-flight{position:absolute;font-size:28px;top:38px}.bee-left{left:5%}.bee-right{right:5%}
+.bee-left:after,.bee-right:after{content:"";display:block;width:90px;height:34px;border-top:2px dashed #f2ad17;border-radius:50%;position:absolute;top:25px}
+.bee-left:after{left:-70px;transform:rotate(-12deg)}.bee-right:after{right:-70px;transform:rotate(12deg)}
+main{max-width:1180px}.card{background:rgba(255,253,248,.95);border:1px solid #f3d79b;border-radius:18px;box-shadow:0 6px 18px rgba(151,111,41,.08)}
+.notice{background:#fff0c7;border:1px solid #f6d98b;border-left:5px solid #e9a51a;color:#62451e;border-radius:12px}
+input,select,textarea{border:1px solid #eadbb9;border-radius:12px;background:#fffefb} input:focus,select:focus,textarea:focus{outline:2px solid rgba(255,189,56,.25);border-color:#f4b72f}
+.mode{border:1px solid #f0dfb9;border-radius:14px;background:#fffdf8}.mode:has(input:checked){border:1.5px solid #f0ad1f;background:linear-gradient(120deg,#fff4cd,#ffe6a0)}
+button{border-radius:12px}.primary{background:#ffc33d;color:#3c2609}.secondary{background:#fff4d7;color:#5a3a12;border:1px solid #efd8a2}.danger{background:#fae1dc;color:#a53b27}
+h2{color:#4a2c0b}#modoAreas h2,#modoLivre h2,.card>h2.no-print{background:linear-gradient(90deg,#ffe49a,#fff5d8);color:#4a2c0b}
+#resultado{border:1px dashed #eab33a;border-radius:16px;background:#fffefb;min-height:200px}
+@media(max-width:760px){.bee-flight{display:none}body:before,body:after{opacity:.35;width:120px}}
+
 </style>
 </head>
 <body>
 <header>
 <div class="header-inner">
-<div class="header-icon">📝</div>
+<div class="header-icon">🐝</div>
 <h1>Velotec Relatórios</h1>
-<p>Assistente inteligente para elaboração de relatórios pedagógicos.</p>
+<p>Assistente inteligente para elaboração de relatórios pedagógicos.</p><div class="bee-flight bee-left">🐝</div><div class="bee-flight bee-right">🐝</div>
 </div>
 </header>
 <main>
