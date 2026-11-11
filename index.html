@@ -197,15 +197,92 @@ h2{color:#4a2c0b}#modoAreas h2,#modoLivre h2,.card>h2.no-print{background:linear
 #resultado{border:1px dashed #eab33a;border-radius:16px;background:#fffefb;min-height:200px}
 @media(max-width:760px){.bee-flight{display:none}body:before,body:after{opacity:.35;width:120px}}
 
+
+/* Identidade visual Velotec Premium — apenas apresentação */
+:root{--safira:#071e42;--safira-medio:#0b3974;--ouro:#f2bf48;--ouro-claro:#fff0ad}
+body{background:radial-gradient(ellipse at 50% 0%,#195ca4 0%,#0c3973 32%,#061a3b 74%,#04132d 100%);background-attachment:fixed;color:#10274e;min-height:100vh}
+body::before,body::after,body:before,body:after{content:none!important;display:none!important}
+header{position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 10%,#14528f 0%,#0a3269 48%,#061b3d 100%);border:0;border-bottom:2px solid #c99a36;box-shadow:0 10px 32px #0005;padding:28px 16px 30px}
+header::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(132deg,transparent 0 8%,#e9b64d 8.2%,#fff3bd 8.6%,transparent 9.2%),linear-gradient(315deg,transparent 0 10%,#e0aa3a 10.2%,#fff1a7 10.5%,transparent 11.1%);opacity:.75}
+.header-inner{position:relative;z-index:1;max-width:980px;margin:auto}
+.header-logo{width:min(255px,65vw);margin:0 auto 0;line-height:0;filter:drop-shadow(0 5px 10px #00112977)}
+.header-logo svg{width:100%;height:auto;display:block}
+header h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(31px,5vw,49px);font-weight:700;letter-spacing:.15em;color:#fff!important;margin:0;text-shadow:0 3px 8px #0007}
+header p{color:#e7f0ff!important;font-size:clamp(14px,2vw,17px);margin:11px auto 0;max-width:720px}
+main{max-width:1120px;margin:22px auto;padding:0 16px 46px;position:relative;z-index:1}
+.card{background:linear-gradient(160deg,#fff 0%,#f8faff 100%);border:1.5px solid #d5a640;border-radius:20px;box-shadow:0 9px 27px #0003;padding:23px;margin-bottom:17px}
+label{color:#132d58}
+input,select,textarea{background:#fff!important;color:#10254b!important;border:1px solid #b8c7df!important;border-radius:12px;padding:12px 14px}
+input:focus,select:focus,textarea:focus{outline:3px solid #f5c65c55!important;border-color:#d2a13a!important}
+.mode{background:#f7faff;border:1px solid #c4d0e2;border-radius:14px;color:#284267}
+.mode strong{color:#12356c}
+.mode:has(input:checked){background:linear-gradient(125deg,#fff8e3,#f7e6b4);border:2px solid #d6a335}
+.mode input{accent-color:#b7821f}
+.notice{background:#fff7df;border:1px solid #e7c877;border-left:5px solid #c7962e;color:#5c4a27;border-radius:12px}
+.small{color:#526783}
+h2,#modoAreas h2,#modoLivre h2,.card>h2.no-print{color:#102e60;background:linear-gradient(90deg,#fce4a3,#fff6dd);border-radius:12px;padding:9px 15px}
+button{border-radius:12px;padding:12px 18px;font-weight:700;box-shadow:0 3px 9px #102c4a18}
+.primary{background:linear-gradient(110deg,#f9d66d,#d99c1e,#ffe59a);color:#071d3c;border:1px solid #b98524}
+.secondary{background:linear-gradient(115deg,#123e79,#07234c);color:#fff;border:1px solid #547ca9}
+.danger{background:#f7edf0;color:#98394b;border:1px solid #e5c8d0}
+#resultado{background:#fff;border:1px solid #b8c9e3;border-radius:14px;color:#162d52;min-height:220px}
+.gerando{color:#a16c12}
+@media(max-width:760px){header{padding:21px 12px 25px}main{padding:0 10px 26px}.card{padding:16px}.header-logo{width:min(220px,67vw)}}
+@media print{body{background:#fff!important;color:#000}header{display:none!important}.card{box-shadow:none!important;border:none!important}#resultado{border:0!important;color:#000!important}body::before,body::after{display:none!important}}
 </style>
 </head>
 <body>
 <header>
-<div class="header-inner">
-<div class="header-icon">🐝</div>
-<h1>Velotec Relatórios</h1>
-<p>Assistente inteligente para elaboração de relatórios pedagógicos.</p><div class="bee-flight bee-left">🐝</div><div class="bee-flight bee-right">🐝</div>
-</div>
+  <div class="header-inner">
+    <div class="header-logo" aria-label="Logomarca Velotec: V dourado com ramos ornamentais e documento">
+      <svg viewBox="0 0 340 205" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="V metálico dourado com documento e ramos dourados">
+        <defs>
+          <linearGradient id="goldVelotec" x1="0" y1="0" x2="1" y2=".9">
+            <stop offset="0" stop-color="#fff5c0"/>
+            <stop offset=".20" stop-color="#e4a72c"/>
+            <stop offset=".43" stop-color="#fff0a1"/>
+            <stop offset=".65" stop-color="#b97713"/>
+            <stop offset=".82" stop-color="#f9d46c"/>
+            <stop offset="1" stop-color="#9e6211"/>
+          </linearGradient>
+          <linearGradient id="goldEdge" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff9d8"/>
+            <stop offset=".5" stop-color="#e4a62a"/>
+            <stop offset="1" stop-color="#b67718"/>
+          </linearGradient>
+          <filter id="logoSoftShadow" x="-35%" y="-35%" width="170%" height="180%">
+            <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#001329" flood-opacity=".55"/>
+          </filter>
+        </defs>
+        <g filter="url(#logoSoftShadow)">
+          <!-- Elegant metallic V, shaped rather than pasted -->
+          <path d="M89 24 H142 L171 111 L203 24 H251 L190 178 H153 Z"
+                fill="url(#goldVelotec)" stroke="url(#goldEdge)" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M99 31 H134 L170 138 L211 31 H238"
+                fill="none" stroke="#fff4bf" stroke-width="2" opacity=".65"/>
+          <path d="M158 165 L188 165" stroke="#8d590f" stroke-width="1.6" opacity=".5"/>
+          <!-- Relatorios: documento vetorial no lugar do livro -->
+          <g transform="translate(212 52)" stroke="url(#goldEdge)" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M0 4 H36 L52 20 V78 H0 Z"/>
+            <path d="M36 4 V20 H52"/>
+            <path d="M10 33 H40 M10 45 H40 M10 57 H33 M10 69 H27"/>
+            <path d="M9 21 H25"/>
+          </g>
+          <!-- Symmetrical gold sprigs with individual leaves -->
+          <g fill="url(#goldVelotec)" stroke="#e8b34c" stroke-width=".65">
+            <path d="M74 145 Q41 112 48 52" fill="none" stroke="url(#goldEdge)" stroke-width="2.3"/>
+            <path d="M266 145 Q299 112 292 52" fill="none" stroke="url(#goldEdge)" stroke-width="2.3"/>
+            <path d="M52 68 Q34 60 37 47 Q50 52 52 68Z M49 84 Q29 79 29 66 Q43 70 49 84Z M51 102 Q31 102 26 89 Q43 90 51 102Z M57 120 Q38 125 31 114 Q46 110 57 120Z M66 136 Q48 145 40 136 Q53 126 66 136Z"/>
+            <path d="M48 68 Q63 57 62 44 Q49 49 48 68Z M47 87 Q64 77 66 63 Q51 68 47 87Z M50 105 Q68 98 73 84 Q57 88 50 105Z M58 122 Q77 119 82 106 Q66 108 58 122Z"/>
+            <path d="M288 68 Q306 60 303 47 Q290 52 288 68Z M291 84 Q311 79 311 66 Q297 70 291 84Z M289 102 Q309 102 314 89 Q297 90 289 102Z M283 120 Q302 125 309 114 Q294 110 283 120Z M274 136 Q292 145 300 136 Q287 126 274 136Z"/>
+            <path d="M292 68 Q277 57 278 44 Q291 49 292 68Z M293 87 Q276 77 274 63 Q289 68 293 87Z M290 105 Q272 98 267 84 Q283 88 290 105Z M282 122 Q263 119 258 106 Q274 108 282 122Z"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <h1>RELATÓRIOS</h1>
+    <p>Assistente inteligente para elaboração de relatórios pedagógicos.</p>
+  </div>
 </header>
 <main>
 
